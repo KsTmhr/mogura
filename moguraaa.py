@@ -8,6 +8,8 @@ mogura_time = 3
 frame = 0.3
 # モグラが起動しているか
 mogura_is_standing = [False, False, False, False, False]
+# モグラタスク
+task = [0,0,0,0,0]
 
 
 # led出力（想定）
@@ -33,6 +35,19 @@ async def mogura(num):
     mogura_is_standing[num] = False
 
 
+# ランダムでキャンセル
+def random_cancel():
+    mogura_num = random.randrange(5)
+
+    # 起動中のやつなら
+    if mogura_is_standing[mogura_num]:
+        # タスクをキャンセル
+        task[mogura_num].cancel()
+        print(f"cancel task{mogura_num}")
+        led(mogura_num, 0)
+        mogura_is_standing[mogura_num] = False
+
+
 # メインループ
 async def main():
 
@@ -42,7 +57,9 @@ async def main():
 
         # 起動してない子だったら起動
         if not mogura_is_standing[mogura_num]:
-            task = asyncio.create_task(mogura(mogura_num))
+            task[mogura_num] = asyncio.create_task(mogura(mogura_num))
+
+        random_cancel()
 
         await asyncio.sleep(frame)
 
