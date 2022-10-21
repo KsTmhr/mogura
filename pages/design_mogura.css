@@ -1,0 +1,43 @@
+.container{
+    text-align: center;
+    FONT-SIZE:300%
+}
+.btn-primary{
+    width:600px;
+    height:150px;
+    font-size:150%;
+}
+.title{
+    font-size:300%;
+    margin-top:20px;
+}
+.start{
+  line-height:70px;
+  font-size:150%;
+}
+#time,#count,#rank{
+  font-size:400%;
+}
+#num,#name{
+  font-size:150%;
+}
+p{
+  font-size:200%;
+}
+#info{
+  font-size:150%;
+}
+#nokori{
+  font-size:75%;
+}
+#yourrank,#desu{
+  font-size:90%;
+}
+#desu{
+  position:relative;left:225px;
+}
+#go_next{
+  width:30%;
+  height:60%;
+  font-size:60%;
+}

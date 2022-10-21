@@ -5,38 +5,40 @@
   <script src="./jquery/jquery-3.6.1.min.js"></script>
   <link href="./bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="manager.js"></script>
+    <link rel="stylesheet" href="design_mogura.css" type="text/css">
 </head>
-
+<div class="background">
 <body class="container">
-  <h1>MOGURAAAA</h1>
+  <h1 class="title">もぐらたたき！！</h1>
   <div id="register">
-    <textarea id="num" cols="30" rows="10"></textarea>
-    <button type="button" class="btn btn-primary" id="send_num">Send</button>
+    <textarea id="num" cols="30" rows="1"></textarea>
+    <button type="button" class="btn btn-primary" id="send_num"><p class="start">Send</p></button>
   </div>
 
   <div id="start">
     <div id="start_game">
       <p>スタートボタンをおしてね！</p>
-      <button type="button" class="btn btn-primary">スタート</button>
+      <button type="button" class="btn btn-primary"><p class="start"> スタート</p></button>
     </div>
     <h2 id="count"></h2>
   </div>
 
   <div id="playing">
-    <p>残り時間</p>
+    <p id="nokori">残り時間</p>
     <h2 id="time"></h2>
   </div>
 
   <div id="result">
-    <p>あなたのランキングは，，，<p/>
+    <p id="yourrank">あなたのランキングは...</p>
     <h2 id="rank"></h2>
-    <p>です！</p>
+    <p id="desu">位です！</p>
     <button type="button" class="btn btn-primary" id="go_next"></button>
     <p id="info"></p>
     <div id="input_name">
-      <textarea id="name" cols="30" rows="10"></textarea>
+      <textarea id="name" cols="30" rows="1"></textarea>
       <button type="button" class="btn btn-primary" id="send_name">名前を登録</button>
     </div>
   </div>
 </body>
+</div>
 </html>

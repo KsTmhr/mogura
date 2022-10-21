@@ -1,11 +1,18 @@
 $(function(){
 
-  var gameTime = 10;
+  var gameTime = 60;
   var count = 0;
   var rank = 0;
 
+
   //var ws = new WebSocket("ws://localhost:8765");
   var ws = new WebSocket("ws://10.0.1.3:8765");
+
+  const countdown = new Audio("SE/countdown.mp3");
+  const playing = new Audio("SE/playing.mp3");
+  const finish = new Audio("SE/finishgong.mp3");
+  const dramroll = new Audio("SE/dramroll.mp3");
+  const result = new Audio("SE/result.mp3");
 
 
   // サーバーからのメッセージ受信時のイベント
@@ -43,12 +50,15 @@ $(function(){
     $("#count").show();
     $("#start_game").hide()
 
+    countdown.play()
+    $("#count").text(3);
+
     // カウントダウン
     let count = 0;
     let counter = setInterval(function(){
       count++;
-      $("#count").text(4-count);
-      if(count > 3){
+      $("#count").text(3-count);
+      if(count > 2){
         // ラズパイに送信
         ws.send(JSON.stringify({"type":"start"}));
         // 画面切り替え
@@ -95,7 +105,12 @@ $(function(){
     $("#start").hide();
     $("#result").hide();
 
-    $("#time").text("Start!!");
+    $("#time").text("スタート!!");
+
+    setTimeout(function(){
+      playing.play()
+    }, 500);
+
     // 残り時間表示
     count = 0;
     counter = setInterval(function(){
@@ -103,23 +118,49 @@ $(function(){
       $("#time").text(gameTime - count);
       if(count > gameTime){
         clearInterval(counter);
-        // 画面切り替え
-        result_page()
+        $("#time").text("終了！！");
+        playing.pause()
+        finish.play()
+        setTimeout(function(){
+          // 画面切り替え
+          result_page()
+        }, 2000);
       }
     }, 1000);
-
   }
 
   // 結果発表ページ
   function result_page(){
+
+    playing.pause()
+    playing.currentTime = 0;
+    finish.play()
+
     console.log("result_page")
-    $("#result").show();
     $("#start").hide();
     $("#input_name").hide();
-    $("#playing").hide();
+    $("#rank").hide();
+    $("#desu").hide();
+    $("#go_next").hide()
+    $("#info").text("");
 
-    $("#rank").text("");
-    $("#info").text("")
+    setTimeout(function(){
+      dramroll.play();
+      $("#playing").hide();
+      $("#result").show();
+    }, 1000);
+
+    setTimeout(function(){
+      dramroll.pause()
+      dramroll.currentTime = 0;
+      result.play();
+      $("#rank").show();
+      $("#desu").show();
+    }, 4000);
+
+    setTimeout(function(){
+      $("#go_next").show();
+    }, 5000);
 
     // 30秒で次へ
     count = 0;
